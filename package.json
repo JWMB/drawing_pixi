@@ -1,0 +1,41 @@
+{
+  "name": "@jwmb/drawing_pixi",
+  "version": "0.0.9",
+  "main": "dist/index.js",
+  "typings": "definitions/index",
+  "typescript": {
+    "definition": "definitions/index"
+  },
+  "description": "PIXI.Graphics drawing utils",
+  "engineStrict": true,
+  "devDependencies": {
+    "@types/es6-shim": "^0.31.32",
+    "@types/jasmine": "^2.5.38",
+    "@types/node": "~9.4.7",
+    "@types/pixi.js": "^4.7.2",
+    "gulp": "^3.9.1",
+    "gulp-clean": "^0.4.0",
+    "gulp-jasmine": "^3.0.0",
+    "gulp-sourcemaps": "^2.6.1",
+    "gulp-typescript": "^4.0.1",
+    "jasmine": "^3.1.0",
+    "merge2": "^1.0.2",
+    "random-js": "^1.0.8",
+    "rimraf": "^2.6.1",
+    "run-sequence": "^2.1.0",
+    "standard-version": "^4.2.0",
+    "tslint": "^5.7.0",
+    "tslint-microsoft-contrib": "^5.0.1",
+    "typescript": "^2.7.2"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "release": "standard-version"
+  },
+  "author": "Jonas Beckeman",
+  "license": "MIT",
+  "dependencies": {
+    "@jwmb/geometry": "0.0.2",
+    "pixi.js": "^4.7.1"
+  }
+}
