@@ -2,6 +2,7 @@
   "compileOnSave": false,
   "compilerOptions": {
     "lib": ["es6", "dom"],
+    //"module": "system", //amd system
     "module": "commonjs",
     "target": "es5",
     "noImplicitAny": true,
@@ -21,7 +22,8 @@
     "removeComments": true,
     "experimentalDecorators": true,
     "types" : ["node", "jasmine"],
-    "declarationDir": "definitions"
+    "declarationDir": "definitions",
+    // "outFile": "./dist/index.js"
   },
   "include": [
     // "index.ts",
