@@ -1,10 +1,10 @@
 {
   "name": "@jwmb/drawing_pixi",
-  "version": "0.0.10",
-  "main": "dist/index.js",
-  "typings": "definitions/index",
+  "version": "0.0.13",
+  "main": "index.js",
+  "typings": "index.d.ts",
   "typescript": {
-    "definition": "definitions/index"
+    "definition": "index.d.ts"
   },
   "description": "PIXI.Graphics drawing utils",
   "engineStrict": true,
@@ -16,10 +16,13 @@
     "gulp": "^3.9.1",
     "gulp-clean": "^0.4.0",
     "gulp-jasmine": "^3.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.6.1",
     "gulp-sourcemaps": "^2.6.1",
     "gulp-typescript": "^4.0.1",
     "jasmine": "^3.1.0",
     "merge2": "^1.0.2",
+    "path": "^0.12.7",
     "random-js": "^1.0.8",
     "rimraf": "^2.6.1",
     "run-sequence": "^2.1.0",

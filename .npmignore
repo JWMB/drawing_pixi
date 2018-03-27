@@ -1,18 +1,12 @@
 *
-#!dist/
-#!dist/*
-#!dist/**/*
 
-!definitions/
-!definitions/*
-!definitions/**/*
-definitions/spec/*
-
-#!*.ts
-#!lib/*.ts
 !lib/*.js
 !lib/**/*.js
+!lib/**/*.d.ts
 lib/spec/**/*.js
+
+!index.d.ts
+!index.js
 
 !package.json
 !*.md

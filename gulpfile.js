@@ -4,36 +4,62 @@ const jasmine = require('gulp-jasmine');
 const clean = require('gulp-clean');
 const runSequence = require('run-sequence');
 const sourcemaps = require('gulp-sourcemaps');
+const rename = require('gulp-rename');
+const path = require('path');
+const fs = require('fs');
+const replace = require('gulp-replace');
 
 const tsProject = ts.createProject('tsconfig.json');
 
-gulp.task('build', function() {
+gulp.task('build', [], function (cb) {
+    runSequence('subbuild', 'moveindex', cb);
+});
+
+gulp.task('subbuild', function() {
     const merge = require('merge2');
-    //const tsProject = ts.createProject('tsconfig.json');
 
     var tsResult = tsProject.src()
 	    .pipe(sourcemaps.init())
         .pipe(tsProject());
 
-    return merge([
-        tsResult.dts.pipe(gulp.dest(tsProject.config.compilerOptions.declarationDir)), //'./definitions')),
+    let toMerge = [
+        tsResult.dts.pipe(gulp.dest(tsProject.config.compilerOptions.declarationDir || tsProject.config.compilerOptions.outDir)),
         tsResult.js
             .pipe(sourcemaps.write())    
 			.pipe(gulp.dest(tsProject.config.compilerOptions.outDir))
-    ]);
+    ];
+
+    return merge(toMerge);
+});
+
+gulp.task('moveindex', function () {
+    const outDir = tsProject.config.compilerOptions.outDir;    
+    const rx = /([\'\"])(\.\/src)/g;
+    return gulp.src([path.join(outDir, 'index.d.ts'), path.join(outDir, 'index.js')])
+        .pipe(replace(rx, "$1./lib/src"))
+        .pipe(gulp.dest(path.join(outDir, '../')));
+    // fs.renameSync(
+    //     path.join(tsProject.config.compilerOptions.outDir, "src/"),
+    //     path.join(tsProject.config.compilerOptions.outDir, tsProject.config.compilerOptions.outDir)
+    // );
+    // return gulp.src(tsProject.config.compilerOptions.outDir)
+    //     .pipe(gulp.dest('../'));
+    // return gulp.src(path.join(tsProject.config.compilerOptions.outDir, "src/"))
+    //     .pipe(rename(path.join(tsProject.config.compilerOptions.outDir, tsProject.config.compilerOptions.outDir)))
+    //     .pipe(gulp.dest(tsProject.config.compilerOptions.outDir)); 
 });
 
 gulp.task('clean', function () {
-    // console.log('asdasd', tsProject.config.compilerOptions);
-    return gulp.src([
-        tsProject.config.compilerOptions.outDir,
-        tsProject.config.compilerOptions.declarationDir
-    ], { read: false }) //'dist'
+    let folders = [tsProject.config.compilerOptions.outDir];
+    if (tsProject.config.compilerOptions.declarationDir) {
+        folders.push(tsProject.config.compilerOptions.declarationDir);
+    }
+    return gulp.src(folders, { read: false })
         .pipe(clean());
 });
 
 gulp.task('test:run', function() {
-    return gulp.src(tsProject.config.compilerOptions.outDir + '/spec/**') //dist
+    return gulp.src(path.join(tsProject.config.compilerOptions.outDir, '/spec/**'))
       .pipe(jasmine())
 });
 

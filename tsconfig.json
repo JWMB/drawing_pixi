@@ -16,17 +16,17 @@
     "emitDecoratorMetadata": true,
     "sourceMap": true,
     "declaration": true,
-    "rootDir": "./src",
-    "outDir": "lib",
+    "rootDir": ".",
+    "outDir": "./lib/",
     "allowSyntheticDefaultImports": true,
     "removeComments": true,
     "experimentalDecorators": true,
     "types" : ["node", "jasmine"],
-    "declarationDir": "definitions",
+    // "declarationDir": "definitions",
     // "outFile": "./dist/index.js"
   },
   "include": [
-    // "index.ts",
+    "index.ts",
     "src/**/*",
     "spec/**/*"
   ]
